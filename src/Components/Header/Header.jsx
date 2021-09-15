@@ -1,12 +1,14 @@
 import React from 'react';
-import './Header.css';
+
+// Custom Styled Components
+import { Container, Title } from "./styles";
 
 export const Header = () => {
   return (
-    <header className='Header'>
-      <h1 className='Header-title'>
+    <Container>
+      <Title>
         HACKER NEWS
-      </h1>
-    </header>
+      </Title>
+    </Container>
   )
 }
