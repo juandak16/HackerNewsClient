@@ -6,9 +6,7 @@ import { Container, Dropdown, StylesSelect } from './styles';
 export const FilterDropdown = (props) => {
   const { typeSelected, setTypeSelected, options } = props;
 
-  console.log('typeSelected: ', typeSelected);
   const handleDropdown = (data) => {
-    console.log(data);
     setTypeSelected(data);
   };
 

@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
+
 `;
 
 export const Body = styled.div`
-  padding: 0 150px;
+  box-sizing: border-box;
+  margin: 0 auto! important;
+  max-width: 1200px;
+  padding: 0 1em;
+
 `;
 
 export const Text = styled.p`
@@ -29,5 +34,9 @@ export const Image = styled.img`
 `;
 
 export const CardsContent = styled.div`
-
+  margin: 0 auto;
+  padding: 38px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
 `;
