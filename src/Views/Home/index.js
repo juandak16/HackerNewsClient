@@ -3,7 +3,7 @@ import { useInView } from "react-intersection-observer";
 
 
 //Import Components
-import { Header } from '../../Components/Header';
+import { Navbar } from '../../Components/Navbar';
 import { TabSelector } from '../../Components/TabSelector';
 import { FilterDropdown } from '../../Components/FilterDropdown';
 import { PostCard } from '../../Components/PostCard';
@@ -11,12 +11,12 @@ import { Loading } from '../../Components/Loading';
 import { Error } from '../../Components/Error';
 
 //import utils data
-import { newsType, tabs, getKey } from './utils';
+import { newsType, getKey } from './utils';
 
 import { useApiCall } from '../../Hooks';
 
 //Custom Styled Components
-import { HomeContainer, Body, CardsContent, Footer } from './styles'
+import { HomeContainer, BodyHome, CardsContent, FooterHome } from './styles'
 
 //limit count post by query
 const limit = 8;
@@ -85,12 +85,11 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      <Header />
-      <Body>
+      <Navbar />
+      <BodyHome >
         <TabSelector
           tabActived={tabActived}
           setTabActived={setTabActived}
-          tabs={tabs}
         />
         <FilterDropdown
           typeSelected={typeSelected}
@@ -105,7 +104,7 @@ const Home = () => {
                 <PostCard
                   item={item}
                   key={`${index}-${item.author}`}
-                  faved={faves.find(fav => getKey(fav) === getKey(item))}
+                  faved={faves.find(fav => getKey(fav) === getKey(item)) ? true : false}
                   manageFave={manageFave}
                 />
               );
@@ -116,21 +115,21 @@ const Home = () => {
                 <PostCard
                   item={item}
                   key={`${index}-${item.author}`}
-                  faved={faves.find(fav => getKey(fav) === getKey(item))}
+                  faved={faves.find(fav => getKey(fav) === getKey(item)) ? true : false}
                   manageFave={manageFave}
                 />
               )
             })
           }
         </CardsContent>
-      </Body>
+      </BodyHome >
       {tabActived === "all" ?
-        <Footer ref={ref}>
+        <FooterHome ref={ref}>
           <Loading />
-        </Footer>
-        : <Footer>
+        </FooterHome>
+        : <FooterHome>
           <Loading />
-        </Footer>}
+        </FooterHome>}
     </HomeContainer>
   );
 }

@@ -22,8 +22,7 @@ export const PostCard = (props) => {
   const { author, created_at, story_title, story_url } = item;
 
   return (
-    <Card>
-
+    <Card data-testid="home-post-card">
       <ContentLeft href={story_url} target="_blank">
         <Head>
           <ClockImage src={Clock} />
@@ -37,7 +36,6 @@ export const PostCard = (props) => {
       <ContentRight>
         <HeartImage onClick={() => { manageFave(item) }} src={faved ? Heart : HeartEmpty} />
       </ContentRight>
-
     </Card>
   )
 }

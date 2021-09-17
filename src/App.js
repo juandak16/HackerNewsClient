@@ -1,7 +1,7 @@
 import './App.css';
 import Routes from './Containers/Routes'
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Routes />

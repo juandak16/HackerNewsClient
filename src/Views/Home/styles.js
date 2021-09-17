@@ -4,7 +4,7 @@ export const HomeContainer = styled.div`
 
 `;
 
-export const Body = styled.div`
+export const BodyHome = styled.div`
   box-sizing: border-box;
   margin: 0 auto! important;
   max-width: 1200px;
@@ -52,6 +52,6 @@ export const ButtonGetData = styled.button`
   background-color: red;
 `;
 
-export const Footer = styled.footer`
+export const FooterHome = styled.footer`
 
 `;

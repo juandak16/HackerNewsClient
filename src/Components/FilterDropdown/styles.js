@@ -37,6 +37,6 @@ export const StylesSelect = {
     ':hover': {
       backgroundColor: "#eaeaea"
     },
-    backgroundColor: isSelected ? "#6bbbfd" : "#fff",
+    backgroundColor: isSelected ? "#eaeaea" : "#fff",
   }),
 };

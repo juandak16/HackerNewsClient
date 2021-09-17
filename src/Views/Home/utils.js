@@ -21,7 +21,7 @@ export const newsType = [
     value: "react",
     label: (
       <Content>
-        <Image src={React} alt="Angular logo" />
+        <Image src={React} alt="Reacts logo" />
         <Text>
           Reacts
         </Text>
@@ -32,7 +32,7 @@ export const newsType = [
     value: "vue",
     label: (
       <Content>
-        <Image src={Vuejs} alt="Angular logo" />
+        <Image src={Vuejs} alt="Vuejs logo" />
         <Text>
           Vuejs
         </Text>

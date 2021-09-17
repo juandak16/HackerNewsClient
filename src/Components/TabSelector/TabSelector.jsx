@@ -4,10 +4,15 @@ import React from 'react';
 import { Container, ButtonSelect } from './styles';
 
 export const TabSelector = (props) => {
-  const { tabActived, setTabActived, tabs } = props;
+  const { tabActived, setTabActived } = props;
+
+  const tabs = [
+    { title: "All", value: "all" },
+    { title: "My faves", value: "faves" }
+  ]
 
   return (
-    <Container>
+    <Container data-testid="home-tab-selector">
       {
         tabs && tabs.map((tab, index) => (
           <ButtonSelect

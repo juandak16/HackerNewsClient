@@ -11,11 +11,11 @@ export const FilterDropdown = (props) => {
       <Dropdown
         name="filter-dropdown"
         onChange={manageFilter}
-        value={typeSelected}
         placeholder="Select your news"
-        options={options}
+        value={typeSelected}
         isSearchable={false}
         styles={StylesSelect}
+        options={options}
         disable={disable}
       />
     </Container>

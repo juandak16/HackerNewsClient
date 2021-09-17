@@ -3,7 +3,7 @@ import React from 'react';
 // Custom Styled Components
 import { Container, Title } from "./styles";
 
-export const Header = () => {
+export const Navbar = () => {
   return (
     <Container>
       <Title>
