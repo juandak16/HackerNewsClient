@@ -18,8 +18,7 @@ import { useApiCall } from '../../Hooks';
 //Custom Styled Components
 import { HomeContainer, BodyHome, CardsContent, FooterHome } from './styles'
 
-//limit count post by query
-const limit = 8;
+
 
 const Home = () => {
   //get typeSelectedStorage index
@@ -34,12 +33,15 @@ const Home = () => {
       : []);
   const [page, setPage] = useState(0);
   const [data, setData] = useState([]);
+  const limit = 8;
+
+  //data query, which is executed when the page or typeSelected changes.
+  let response = useApiCall(typeSelected?.value, page, limit);
 
   //implementation of the intersection observer
   const { ref, inView } = useInView({ trackVisibility: true, delay: 300 });
 
-  //data query, which is executed when the page or typeSelected changes.
-  let response = useApiCall(typeSelected?.value, page, limit);
+
 
   //concatenating new data
   useEffect(() => {
@@ -47,7 +49,7 @@ const Home = () => {
       let newArray = data.concat(response.data);
       setData([...new Set(newArray)]);
     }
-  }, [response.data]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [response?.data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //execute page change when viewport is in footer
   useEffect(() => {
@@ -79,12 +81,13 @@ const Home = () => {
     setTypeSelected(item);
   }
 
-  if (response.error) {
+  if (response?.error) {
     return <Error />;
   }
 
+
   return (
-    <HomeContainer>
+    <HomeContainer data-testid="home-container">
       <Navbar />
       <BodyHome >
         <TabSelector
@@ -124,7 +127,7 @@ const Home = () => {
         </CardsContent>
       </BodyHome >
       {tabActived === "all" ?
-        <FooterHome ref={ref}>
+        <FooterHome ref={ref} data-testid="home-footer">
           <Loading />
         </FooterHome>
         : <FooterHome>
