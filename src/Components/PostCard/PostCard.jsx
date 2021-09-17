@@ -19,7 +19,7 @@ import Heart from '../../Static/Assets/Images/heart.png';
 
 export const PostCard = (props) => {
   const { item, faved, manageFave } = props;
-  const { author, created_at, story_title, story_url, story_id } = item;
+  const { author, created_at, story_title, story_url } = item;
   return (
     <Card>
       <ContentLeft href={story_url}>

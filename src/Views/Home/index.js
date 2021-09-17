@@ -90,37 +90,35 @@ const Home = () => {
           options={newsType}
           disable={tabActived !== "all"}
         />
-        {!response.loading ?
-          <CardsContent>
-            {tabActived === "all" ?
-              data && data?.map((item, index) => {
-                return (
-                  <PostCard
-                    item={item}
-                    key={`${index}-${item.author}`}
-                    faved={faves.find(fav => getKey(fav) === getKey(item))}
-                    manageFave={manageFave}
-                  />
-                );
-              })
-              :
-              faves?.map((item, index) => {
-                return (
-                  <PostCard
-                    item={item}
-                    key={`${index}-${item.author}`}
-                    faved={faves.find(fav => getKey(fav) === getKey(item))}
-                    manageFave={manageFave}
-                  />
-                )
-              })
-            }
-
-          </CardsContent>
-          : <Loading />
-        }
+        <CardsContent>
+          {tabActived === "all" ?
+            data && data?.map((item, index) => {
+              return (
+                <PostCard
+                  item={item}
+                  key={`${index}-${item.author}`}
+                  faved={faves.find(fav => getKey(fav) === getKey(item))}
+                  manageFave={manageFave}
+                />
+              );
+            })
+            :
+            faves?.map((item, index) => {
+              return (
+                <PostCard
+                  item={item}
+                  key={`${index}-${item.author}`}
+                  faved={faves.find(fav => getKey(fav) === getKey(item))}
+                  manageFave={manageFave}
+                />
+              )
+            })
+          }
+        </CardsContent>
       </Body>
-      <Footer ref={ref} />
+      <Footer ref={ref}>
+        <Loading />
+      </Footer>
     </HomeContainer>
   );
 }
