@@ -8,7 +8,7 @@ import { Container } from "./styles";
 export const Loading = () => {
   return (
     <Container>
-      <div class="lds-heart">
+      <div className="lds-heart">
         <div></div>
       </div>
     </Container>

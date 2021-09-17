@@ -7,7 +7,7 @@ export const Container = styled.div`
   margin-bottom: 70px;
 `;
 
-export const Title = styled.div` 
+export const Title = styled.h1` 
   margin: 0;
   object-fit: contain;
   font-family: Baskerville;

@@ -5,5 +5,5 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-export const Title = styled.h1` 
+export const Title = styled.h2` 
 `;

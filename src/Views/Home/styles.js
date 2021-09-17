@@ -35,7 +35,8 @@ export const Image = styled.img`
 
 export const CardsContent = styled.div`
   margin: 0 auto;
-  padding: 38px 0;
+  padding: 0;
+  padding-top: 38px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 30px;
@@ -51,6 +52,6 @@ export const ButtonGetData = styled.button`
   background-color: red;
 `;
 
-export const Footer = styled.div`
+export const Footer = styled.footer`
 
 `;

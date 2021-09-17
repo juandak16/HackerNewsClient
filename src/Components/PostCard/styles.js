@@ -9,6 +9,10 @@ export const Card = styled.div`
   padding: 0 0 0 26px;
   align-items: center;
   max-width: 550px;
+  transition: 0.3s;
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 export const ContentLeft = styled.a`

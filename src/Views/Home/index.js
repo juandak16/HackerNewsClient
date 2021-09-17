@@ -18,9 +18,11 @@ import { useApiCall } from '../../Hooks';
 //Custom Styled Components
 import { HomeContainer, Body, CardsContent, Footer } from './styles'
 
+//limit count post by query
 const limit = 8;
 
 const Home = () => {
+  //get typeSelectedStorage index
   const indexSelect = newsType.findIndex(
     (item) => item.value === localStorage.getItem('typeSelectedStorage')
   );
@@ -33,10 +35,13 @@ const Home = () => {
   const [page, setPage] = useState(0);
   const [data, setData] = useState([]);
 
+  //implementation of the intersection observer
   const { ref, inView } = useInView({ trackVisibility: true, delay: 300 });
 
+  //data query, which is executed when the page or typeSelected changes.
   let response = useApiCall(typeSelected?.value, page, limit);
 
+  //concatenating new data
   useEffect(() => {
     if (response?.data) {
       let newArray = data.concat(response.data);
@@ -44,11 +49,13 @@ const Home = () => {
     }
   }, [response.data]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  //execute page change when viewport is in footer
   useEffect(() => {
     if (inView)
       setPage(page + 1)
   }, [inView]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  //add or delete favorite stories
   const manageFave = (item) => {
     const exists = faves.find(fav => getKey(fav) === getKey(item));
     let newArray = [];
@@ -64,6 +71,7 @@ const Home = () => {
     };
   }
 
+  //change filter selected
   const manageFilter = (item) => {
     setPage(0);
     setData([]);
@@ -86,7 +94,7 @@ const Home = () => {
         />
         <FilterDropdown
           typeSelected={typeSelected}
-          setTypeSelected={manageFilter}
+          manageFilter={manageFilter}
           options={newsType}
           disable={tabActived !== "all"}
         />
@@ -116,9 +124,13 @@ const Home = () => {
           }
         </CardsContent>
       </Body>
-      <Footer ref={ref}>
-        <Loading />
-      </Footer>
+      {tabActived === "all" ?
+        <Footer ref={ref}>
+          <Loading />
+        </Footer>
+        : <Footer>
+          <Loading />
+        </Footer>}
     </HomeContainer>
   );
 }

@@ -20,25 +20,24 @@ import Heart from '../../Static/Assets/Images/heart.png';
 export const PostCard = (props) => {
   const { item, faved, manageFave } = props;
   const { author, created_at, story_title, story_url } = item;
+
   return (
     <Card>
-      <ContentLeft href={story_url}>
+
+      <ContentLeft href={story_url} target="_blank">
         <Head>
           <ClockImage src={Clock} />
           <TextDateAndAuthor>
             {timeago.format(created_at)} by {author}
           </TextDateAndAuthor>
         </Head>
-
         <Title>{story_title}</Title>
       </ContentLeft>
+
       <ContentRight>
-        {
-          faved ?
-            <HeartImage onClick={() => { manageFave(item) }} src={Heart} />
-            : <HeartImage onClick={() => { manageFave(item) }} src={HeartEmpty} />
-        }
+        <HeartImage onClick={() => { manageFave(item) }} src={faved ? Heart : HeartEmpty} />
       </ContentRight>
+
     </Card>
   )
 }

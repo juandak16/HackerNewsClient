@@ -4,18 +4,13 @@ import React from 'react';
 import { Container, Dropdown, StylesSelect } from './styles';
 
 export const FilterDropdown = (props) => {
-  const { typeSelected, setTypeSelected, options, disable } = props;
-
-  const handleDropdown = (data) => {
-    setTypeSelected(data);
-  };
-
+  const { typeSelected, manageFilter, options, disable } = props;
 
   return (
     <Container>
       <Dropdown
         name="filter-dropdown"
-        onChange={handleDropdown}
+        onChange={manageFilter}
         value={typeSelected}
         placeholder="Select your news"
         options={options}

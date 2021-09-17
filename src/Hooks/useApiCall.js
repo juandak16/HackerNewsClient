@@ -10,18 +10,16 @@ export const useApiCall = (typeSelected, page, limit) => {
   const [error, setError] = useState(undefined);
 
   useEffect(() => {
-    let endpoint = null;
 
     setLoading(true);
     //get endpoint url
-    endpoint = getEndpoint(typeSelected, page, limit);
+    let endpoint = getEndpoint(typeSelected, page, limit);
 
     //get data hits
     axios.get(endpoint)
       .then(({ data }) => {
         //filter data by empty fields
         setData(formatData(data));
-        return data;
       })
       .catch(error => {
         setError(error);
