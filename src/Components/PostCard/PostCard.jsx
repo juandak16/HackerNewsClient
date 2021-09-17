@@ -2,26 +2,42 @@ import React from 'react';
 import * as timeago from "timeago.js";
 
 //Custom Styled Components
-import { Card, ContentRight, ContentLeft, Head, Title, ClockImage, TextDateAndAuthor } from './styles';
+import {
+  Card,
+  ContentRight,
+  ContentLeft,
+  Head,
+  Title,
+  ClockImage,
+  TextDateAndAuthor,
+  HeartImage
+} from './styles';
 
 import Clock from '../../Static/Assets/Images/clock.png';
+import HeartEmpty from '../../Static/Assets/Images/heartEmpty.png';
+import Heart from '../../Static/Assets/Images/heart.png';
 
 export const PostCard = (props) => {
-  const { author, date, title, url } = props;
+  const { item, faved, manageFave } = props;
+  const { author, created_at, story_title, story_url, story_id } = item;
   return (
     <Card>
-      <ContentLeft href={url}>
+      <ContentLeft href={story_url}>
         <Head>
           <ClockImage src={Clock} />
           <TextDateAndAuthor>
-            {timeago.format(date)} by {author}
+            {timeago.format(created_at)} by {author}
           </TextDateAndAuthor>
         </Head>
 
-        <Title>{title}</Title>
+        <Title>{story_title}</Title>
       </ContentLeft>
       <ContentRight>
-        corazon
+        {
+          faved ?
+            <HeartImage onClick={() => { manageFave(item) }} src={Heart} />
+            : <HeartImage onClick={() => { manageFave(item) }} src={HeartEmpty} />
+        }
       </ContentRight>
     </Card>
   )

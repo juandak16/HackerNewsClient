@@ -21,9 +21,10 @@ export const ContentRight = styled.div`
   width: 68px;
   height: 100%;
   border-radius: 0 6px 6px 0;
-  opacity: 0.06;
-  background-color: #606060;
-  border: solid 1px #606060;
+  background-color: rgba(96,96,96,0.06);
+  border: solid 1px rgba(96,96,96,0.06);;
+  display: flex;
+  align-items: center;
 `;
 
 export const Head = styled.div`
@@ -51,4 +52,12 @@ export const ClockImage = styled.img`
   object-fit: contain;
   margin: 0;
   margin-right: 8px;
+`;
+
+export const HeartImage = styled.img`
+  width: 24px;
+  height: 22px;
+  object-fit: contain;
+  margin: 0 auto;
+  cursor: pointer;
 `;

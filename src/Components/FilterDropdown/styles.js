@@ -3,9 +3,12 @@ import Select from "react-select";
 
 export const Container = styled.div`
   width: 240px;
+  height: 38px;
 `;
 
 export const Dropdown = styled(Select)`
+  opacity: ${(props) => (props.disable ? '0' : '1')}
+
 `;
 
 export const StylesSelect = {

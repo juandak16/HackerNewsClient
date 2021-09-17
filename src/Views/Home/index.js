@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useInView } from "react-intersection-observer";
 
 
 //Import Components
@@ -10,20 +11,65 @@ import { Loading } from '../../Components/Loading';
 import { Error } from '../../Components/Error';
 
 //import utils data
-import { newsType, tabs } from './utils';
+import { newsType, tabs, getKey } from './utils';
 
 import { useApiCall } from '../../Hooks';
 
 //Custom Styled Components
-import { HomeContainer, Body, CardsContent } from './styles'
+import { HomeContainer, Body, CardsContent, Footer } from './styles'
 
+const limit = 8;
 
 const Home = () => {
+  const indexSelect = newsType.findIndex(
+    (item) => item.value === localStorage.getItem('typeSelectedStorage')
+  );
   const [tabActived, setTabActived] = useState("all");
-  const [typeSelected, setTypeSelected] = useState(null);
+  const [typeSelected, setTypeSelected] = useState(newsType[indexSelect]);
+  const [faves, setFaves] = useState(
+    localStorage.getItem('favesStorage') ?
+      JSON.parse(localStorage.getItem('favesStorage'))
+      : []);
   const [page, setPage] = useState(0);
+  const [data, setData] = useState([]);
 
-  const response = useApiCall(typeSelected?.value, page);
+  const { ref, inView } = useInView({ trackVisibility: true, delay: 300 });
+
+  let response = useApiCall(typeSelected?.value, page, limit);
+
+  useEffect(() => {
+    if (response?.data) {
+      let newArray = data.concat(response.data);
+      setData([...new Set(newArray)]);
+    }
+  }, [response.data]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (inView)
+      setPage(page + 1)
+  }, [inView]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const manageFave = (item) => {
+    const exists = faves.find(fav => getKey(fav) === getKey(item));
+    let newArray = [];
+
+    if (exists) {
+      newArray = faves.filter((fav) => getKey(fav) !== getKey(item));
+      localStorage.setItem('favesStorage', JSON.stringify(newArray));
+      setFaves(newArray);
+    } else {
+      newArray = [...faves, item];
+      localStorage.setItem('favesStorage', JSON.stringify(newArray));
+      setFaves([...faves, item]);
+    };
+  }
+
+  const manageFilter = (item) => {
+    setPage(0);
+    setData([]);
+    localStorage.setItem('typeSelectedStorage', item.value);
+    setTypeSelected(item);
+  }
 
   if (response.error) {
     return <Error />;
@@ -40,20 +86,31 @@ const Home = () => {
         />
         <FilterDropdown
           typeSelected={typeSelected}
-          setTypeSelected={setTypeSelected}
+          setTypeSelected={manageFilter}
           options={newsType}
+          disable={tabActived !== "all"}
         />
         {!response.loading ?
           <CardsContent>
-            {
-              response && response.data.map((item, index) => {
+            {tabActived === "all" ?
+              data && data?.map((item, index) => {
                 return (
                   <PostCard
-                    author={item.author}
-                    date={item.created_at}
-                    title={item.story_title}
-                    url={item.story_url}
+                    item={item}
                     key={`${index}-${item.author}`}
+                    faved={faves.find(fav => getKey(fav) === getKey(item))}
+                    manageFave={manageFave}
+                  />
+                );
+              })
+              :
+              faves?.map((item, index) => {
+                return (
+                  <PostCard
+                    item={item}
+                    key={`${index}-${item.author}`}
+                    faved={faves.find(fav => getKey(fav) === getKey(item))}
+                    manageFave={manageFave}
                   />
                 )
               })
@@ -63,6 +120,7 @@ const Home = () => {
           : <Loading />
         }
       </Body>
+      <Footer ref={ref} />
     </HomeContainer>
   );
 }

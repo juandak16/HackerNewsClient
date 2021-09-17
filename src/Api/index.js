@@ -1,3 +1,3 @@
-export const getEndpoint = (typeSelected, page) => {
-  return `https://hn.algolia.com/api/v1/search_by_date?query=${typeSelected}&page=${page}`
+export const getEndpoint = (typeSelected, page, limit) => {
+  return `https://hn.algolia.com/api/v1/search_by_date?${typeSelected ? `query=${typeSelected}` : ''}&page=${page}&hitsPerPage=${limit}`
 }

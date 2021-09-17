@@ -45,3 +45,7 @@ export const tabs = [
   { title: "All", value: "all" },
   { title: "My faves", value: "faves" }
 ]
+
+export const getKey = (item) => {
+  return `${item.created_at}-${item.author}`;
+}

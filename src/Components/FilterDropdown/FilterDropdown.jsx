@@ -4,7 +4,7 @@ import React from 'react';
 import { Container, Dropdown, StylesSelect } from './styles';
 
 export const FilterDropdown = (props) => {
-  const { typeSelected, setTypeSelected, options } = props;
+  const { typeSelected, setTypeSelected, options, disable } = props;
 
   const handleDropdown = (data) => {
     setTypeSelected(data);
@@ -21,6 +21,7 @@ export const FilterDropdown = (props) => {
         options={options}
         isSearchable={false}
         styles={StylesSelect}
+        disable={disable}
       />
     </Container>
   )

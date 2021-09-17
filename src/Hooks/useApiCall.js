@@ -4,26 +4,31 @@ import axios from 'axios';
 import { getEndpoint } from '../Api/index';
 import { formatData } from '../Utils/utils';
 
-export const useApiCall = (typeSelected, page) => {
+export const useApiCall = (typeSelected, page, limit) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(undefined);
   const [error, setError] = useState(undefined);
 
   useEffect(() => {
+    let endpoint = null;
+
     setLoading(true);
-    const endpoint = getEndpoint(typeSelected, page);
+    //get endpoint url
+    endpoint = getEndpoint(typeSelected, page, limit);
+
+    //get data hits
     axios.get(endpoint)
       .then(({ data }) => {
-        const dataFormated = formatData(data);
-        setData(dataFormated);
-        setLoading(false);
+        //filter data by empty fields
+        setData(formatData(data));
+        return data;
       })
       .catch(error => {
         setError(error);
-        setLoading(false);
-        throw new Error({ type: `::ERROR:: calling api ${endpoint}`, error });
       });
-  }, [typeSelected, page]);
+    setLoading(false);
+
+  }, [typeSelected, page]);// eslint-disable-line react-hooks/exhaustive-deps
 
   return { loading, data, error };
 };

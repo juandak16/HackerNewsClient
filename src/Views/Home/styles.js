@@ -40,3 +40,13 @@ export const CardsContent = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
 `;
+
+export const ButtonGetData = styled.button`
+  all: unset;
+  cursor: pointer;
+  background-color: red;
+`;
+
+export const Footer = styled.div`
+
+`;
