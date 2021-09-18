@@ -11,32 +11,31 @@ import { Loading } from '../../Components/Loading';
 import { Error } from '../../Components/Error';
 
 //import utils data
-import { newsType, getKey } from './utils';
+import { NEWS_TYPE, getKey } from './utils';
 
 import { useApiCall } from '../../Hooks';
 
 //Custom Styled Components
 import { HomeContainer, BodyHome, CardsContent, FooterHome } from './styles'
 
-
+const LIMIT = 8;
 
 const Home = () => {
   //get typeSelectedStorage index
-  const indexSelect = newsType.findIndex(
+  const indexSelect = NEWS_TYPE.findIndex(
     (item) => item.value === localStorage.getItem('typeSelectedStorage')
   );
   const [tabActived, setTabActived] = useState("all");
-  const [typeSelected, setTypeSelected] = useState(newsType[indexSelect]);
+  const [typeSelected, setTypeSelected] = useState(NEWS_TYPE[indexSelect]);
   const [faves, setFaves] = useState(
     localStorage.getItem('favesStorage') ?
       JSON.parse(localStorage.getItem('favesStorage'))
       : []);
   const [page, setPage] = useState(0);
   const [data, setData] = useState([]);
-  const limit = 8;
 
   //data query, which is executed when the page or typeSelected changes.
-  let response = useApiCall(typeSelected?.value, page, limit);
+  let response = useApiCall(typeSelected?.value, page, LIMIT);
 
   //implementation of the intersection observer
   const { ref, inView } = useInView({ trackVisibility: true, delay: 300 });
@@ -97,7 +96,7 @@ const Home = () => {
         <FilterDropdown
           typeSelected={typeSelected}
           manageFilter={manageFilter}
-          options={newsType}
+          options={NEWS_TYPE}
           disable={tabActived !== "all"}
         />
         <CardsContent>

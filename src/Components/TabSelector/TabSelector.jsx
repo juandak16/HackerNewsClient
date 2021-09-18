@@ -6,7 +6,7 @@ import { Container, ButtonSelect } from './styles';
 export const TabSelector = (props) => {
   const { tabActived, setTabActived } = props;
 
-  const tabs = [
+  const TABS = [
     { title: "All", value: "all" },
     { title: "My faves", value: "faves" }
   ]
@@ -14,7 +14,7 @@ export const TabSelector = (props) => {
   return (
     <Container data-testid="home-tab-selector">
       {
-        tabs && tabs.map((tab, index) => (
+        TABS?.map((tab, index) => (
           <ButtonSelect
             onClick={() => { setTabActived(tab.value) }}
             key={index}

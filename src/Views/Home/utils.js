@@ -5,7 +5,7 @@ import Angular from "../../Static/Assets/Images/angular.png";
 import React from "../../Static/Assets/Images/react.png";
 import Vuejs from "../../Static/Assets/Images/vuejs.png";
 
-export const newsType = [
+export const NEWS_TYPE = [
   {
     value: "angular",
     label: (
@@ -39,11 +39,6 @@ export const newsType = [
       </Content>
     ),
   },
-]
-
-export const tabs = [
-  { title: "All", value: "all" },
-  { title: "My faves", value: "faves" }
 ]
 
 export const getKey = (item) => {

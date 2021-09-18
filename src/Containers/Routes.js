@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,7 +13,7 @@ const Home = React.lazy(() => import("../Views/Home"));
 const Routes = () => {
   return (
     <Router>
-      <React.Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading />}>
         <Switch>
           <Route
             exact
@@ -25,7 +25,7 @@ const Routes = () => {
             component={Home}
           />
         </Switch>
-      </React.Suspense>
+      </Suspense>
     </Router>
   );
 }
