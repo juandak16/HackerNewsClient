@@ -34,7 +34,7 @@ export const PostCard = (props) => {
       </ContentLeft>
 
       <ContentRight>
-        <HeartImage onClick={() => { manageFave(item) }} src={faved ? Heart : HeartEmpty} />
+        <HeartImage data-testid="home-post-card-heart" onClick={() => { manageFave(item) }} src={faved ? Heart : HeartEmpty} />
       </ContentRight>
     </Card>
   )
